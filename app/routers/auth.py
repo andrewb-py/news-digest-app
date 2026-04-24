@@ -13,25 +13,25 @@ templates = Jinja2Templates(directory="app/templates")
 
 @router.get("/register", response_class=HTMLResponse)
 async def register_form(request: Request):
-    """
+    """! 
     Отображает форму регистрации.
-
-    :param request: FastAPI Request объект
-    :return: HTML-страница с формой
+    
+    @param request FastAPI Request объект
+    @return HTML-страница с формой
     """
     return templates.TemplateResponse("register.html", {"request": request, "error": None})
 
 @router.post("/register", response_class=HTMLResponse)
 async def register(request: Request, db: AsyncSession = Depends(get_db)):
-    """
+    """! 
     Обрабатывает форму регистрации нового пользователя.
-
+    
     Валидирует email (уникальность) и сложность пароля.
     При успехе создаёт запись в БД, генерирует JWT и перенаправляет в личный кабинет.
-
-    :param request: FastAPI Request объект с формой
-    :param db: Асинхронная сессия SQLAlchemy
-    :return: RedirectResponse на /dashboard или HTML с ошибками
+    
+    @param request FastAPI Request объект с формой
+    @param db Асинхронная сессия SQLAlchemy
+    @return RedirectResponse на /dashboard или HTML с ошибками
     """
     form = await request.form()
     email, password = form.get("email"), form.get("password")
@@ -63,24 +63,24 @@ async def register(request: Request, db: AsyncSession = Depends(get_db)):
 
 @router.get("/login", response_class=HTMLResponse)
 async def login_form(request: Request):
-    """
+    """! 
     Отображает форму входа.
-
-    :param request: FastAPI Request объект
-    :return: HTML-страница с формой входа
+    
+    @param request FastAPI Request объект
+    @return HTML-страница с формой входа
     """
     return templates.TemplateResponse("login.html", {"request": request, "error": None})
 
 @router.post("/login", response_class=HTMLResponse)
 async def login(request: Request, db: AsyncSession = Depends(get_db)):
-    """
+    """! 
     Обрабатывает форму входа.
-
+    
     Проверяет email и пароль. При успехе генерирует JWT и перенаправляет в кабинет.
-
-    :param request: FastAPI Request объект с формой
-    :param db: Асинхронная сессия SQLAlchemy
-    :return: RedirectResponse на /dashboard или HTML с ошибкой
+    
+    @param request FastAPI Request объект с формой
+    @param db Асинхронная сессия SQLAlchemy
+    @return RedirectResponse на /dashboard или HTML с ошибкой
     """
     form = await request.form()
     email, password = form.get("email"), form.get("password")
@@ -96,10 +96,10 @@ async def login(request: Request, db: AsyncSession = Depends(get_db)):
 
 @router.post("/logout")
 async def logout():
-    """
+    """! 
     Выходит из аккаунта, удаляя JWT-токен из куки.
-
-    :return: RedirectResponse на страницу входа
+    
+    @return RedirectResponse на страницу входа
     """
     resp = RedirectResponse(url="/auth/login", status_code=status.HTTP_303_SEE_OTHER)
     resp.delete_cookie("access_token")

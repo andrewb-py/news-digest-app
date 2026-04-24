@@ -10,13 +10,13 @@ from sqlalchemy import select
 settings = get_settings()
 
 async def _send_email(to_email: str, subject: str, html_body: str):
-    """
+    """! 
     Отправляет HTML-письмо через SMTP-сервер.
-
-    :param to_email: Адрес получателя
-    :param subject: Тема письма
-    :param html_body: HTML-содержимое письма
-    :raises aiosmtplib.SMTPException: При ошибках соединения или аутентификации
+    
+    @param to_email Адрес получателя
+    @param subject Тема письма
+    @param html_body HTML-содержимое письма
+    @exception aiosmtplib.SMTPException При ошибках соединения или аутентификации
     """
     if not settings.SMTP_USER or not settings.SMTP_PASSWORD:
         print("SMTP не настроен, пропуск отправки")
@@ -37,11 +37,11 @@ async def _send_email(to_email: str, subject: str, html_body: str):
         print(f"Ошибка отправки: {e}")
 
 async def notify_users_about_new_news(news_id: int):
-    """
+    """! 
     Рассылает уведомления пользователям о новой новости, если она относится к их интересам.
-
-    :param news_id: ID новой публикации
-    :raises Exception: При ошибках отправки (логируются, но не прерывают выполнение)
+    
+    @param news_id ID новой публикации
+    @exception Exception При ошибках отправки (логируются, но не прерывают выполнение)
     """
     async with async_session() as db:
         from app.models.news import NewsItem

@@ -4,15 +4,15 @@ from app.config import get_settings
 settings = get_settings()
 
 async def generate_news_data(text: str, source_url: str, available_topics: list[str] = None) -> dict:
-    """
+    """! 
     Генерирует заголовок, саммари и темы для новости с помощью LLM.
-
-    :param text: Исходный текст статьи или комментария
-    :param source_url: URL источника для контекста
-    :param available_topics: Список допустимых slug тем для фильтрации
-    :return: Словарь {"title": str, "summary": str, "topics": List[str]}
-    :raises httpx.HTTPError: При ошибке запроса к OpenRouter API
-    :raises json.JSONDecodeError: При невалидном ответе LLM
+    
+    @param text Исходный текст статьи или комментария
+    @param source_url URL источника для контекста
+    @param available_topics Список допустимых slug тем для фильтрации (опционально)
+    @return dict Словарь {"title": str, "summary": str, "topics": List[str]}
+    @exception httpx.HTTPError При ошибке запроса к OpenRouter API
+    @exception json.JSONDecodeError При невалидном ответе LLM
     """
     ALLOWED_TOPICS = ["tech", "science", "business", "sport", "politics"]
     topics_str = ", ".join([f'"{t}"' for t in ALLOWED_TOPICS])

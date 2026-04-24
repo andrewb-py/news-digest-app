@@ -19,13 +19,13 @@ templates = Jinja2Templates(directory="app/templates")
 
 @router.get("/moderation", response_class=HTMLResponse)
 async def moderation_page(request: Request, db: AsyncSession = Depends(get_db), admin: User = Depends(require_admin)):
-    """
+    """! 
     Отображает страницу модерации для администратора.
-
-    :param request: FastAPI Request объект
-    :param db: Асинхронная сессия SQLAlchemy
-    :param admin: Администратор (авторизован)
-    :return: HTML-страница со списком ожидающих модерации материалов
+    
+    @param request FastAPI Request объект
+    @param db Асинхронная сессия SQLAlchemy
+    @param admin Администратор (авторизован)
+    @return HTML-страница со списком ожидающих модерации материалов
     """
     query = select(NewsSubmission).where(NewsSubmission.status == "pending").order_by(NewsSubmission.created_at.desc())
     subs = (await db.execute(query)).scalars().all()
@@ -46,18 +46,18 @@ async def approve_submission(
     summary: str = Form(None),
     topic_slugs: list[str] = Form(None)
 ):
-    """
+    """! 
     Одобряет материал на модерации и публикует новость.
-
-    :param sub_id: ID материала для модерации
-    :param request: FastAPI Request объект
-    :param bg_tasks: Фоновые задачи FastAPI
-    :param db: Асинхронная сессия SQLAlchemy
-    :param admin: Администратор (авторизован)
-    :param title: Заголовок новости (может быть переопределен)
-    :param summary: Саммари новости (может быть переопределено)
-    :param topic_slugs: Список slug тем для новости
-    :return: RedirectResponse на страницу модерации
+    
+    @param sub_id ID материала для модерации
+    @param request FastAPI Request объект
+    @param bg_tasks Фоновые задачи FastAPI
+    @param db Асинхронная сессия SQLAlchemy
+    @param admin Администратор (авторизован)
+    @param title Заголовок новости (может быть переопределен)
+    @param summary Саммари новости (может быть переопределено)
+    @param topic_slugs Список slug тем для новости
+    @return RedirectResponse на страницу модерации
     """
     sub = (await db.execute(select(NewsSubmission).where(NewsSubmission.id == sub_id))).scalar_one_or_none()
     if not sub:
@@ -96,13 +96,13 @@ async def approve_submission(
 
 @router.post("/moderation/{sub_id}/reject")
 async def reject_submission(sub_id: int, db: AsyncSession = Depends(get_db), admin: User = Depends(require_admin)):
-    """
+    """! 
     Отклоняет материал на модерации.
-
-    :param sub_id: ID материала для модерации
-    :param db: Асинхронная сессия SQLAlchemy
-    :param admin: Администратор (авторизован)
-    :return: RedirectResponse на страницу модерации
+    
+    @param sub_id ID материала для модерации
+    @param db Асинхронная сессия SQLAlchemy
+    @param admin Администратор (авторизован)
+    @return RedirectResponse на страницу модерации
     """
     sub = (await db.execute(select(NewsSubmission).where(NewsSubmission.id == sub_id))).scalar_one_or_none()
     if sub:
@@ -113,13 +113,13 @@ async def reject_submission(sub_id: int, db: AsyncSession = Depends(get_db), adm
 
 @router.post("/moderation/{sub_id}/delete")
 async def delete_submission(sub_id: int, db: AsyncSession = Depends(get_db), admin: User = Depends(require_admin)):
-    """
+    """! 
     Удаляет материал на модерации.
-
-    :param sub_id: ID материала для модерации
-    :param db: Асинхронная сессия SQLAlchemy
-    :param admin: Администратор (авторизован)
-    :return: RedirectResponse на страницу модерации
+    
+    @param sub_id ID материала для модерации
+    @param db Асинхронная сессия SQLAlchemy
+    @param admin Администратор (авторизован)
+    @return RedirectResponse на страницу модерации
     """
     sub = (await db.execute(select(NewsSubmission).where(NewsSubmission.id == sub_id))).scalar_one_or_none()
     if sub:
@@ -135,15 +135,15 @@ async def admin_add_form(
     db: AsyncSession = Depends(get_db), 
     admin: User = Depends(require_admin)
 ):
-    """
+    """! 
     Обрабатывает добавление материала администратором через URL или файл.
-
-    :param request: FastAPI Request объект
-    :param url: URL для парсинга (опционально)
-    :param file: Загружаемый файл PDF (опционально)
-    :param db: Асинхронная сессия SQLAlchemy
-    :param admin: Администратор (авторизован)
-    :return: RedirectResponse на страницу модерации
+    
+    @param request FastAPI Request объект
+    @param url URL для парсинга (опционально)
+    @param file Загружаемый файл PDF (опционально)
+    @param db Асинхронная сессия SQLAlchemy
+    @param admin Администратор (авторизован)
+    @return RedirectResponse на страницу модерации
     """
     if url:
         if not await is_url_accessible(url):

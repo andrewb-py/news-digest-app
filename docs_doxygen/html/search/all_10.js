@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['save_5fnotifications_0',['save_notifications',['../namespaceapp_1_1routers_1_1users.html#a1ca1db92ae9d9c9f44b18078497a4b7b',1,'app::routers::users']]],
+  ['save_5ftopics_1',['save_topics',['../namespaceapp_1_1routers_1_1users.html#acc4d407c43710e98452c84faef22e214',1,'app::routers::users']]],
+  ['search_5fnews_2',['search_news',['../namespaceapp_1_1routers_1_1news.html#ab898ee6dd243a7dbfa5fe8c373c8523c',1,'app::routers::news']]],
+  ['secret_5fkey_3',['SECRET_KEY',['../classapp_1_1config_1_1_settings.html#a9b748884aa9c58f45c42070556e0bc93',1,'app::config::Settings']]],
+  ['security_2epy_4',['security.py',['../security_8py.html',1,'']]],
+  ['settings_5',['Settings',['../classapp_1_1config_1_1_settings.html',1,'app::config']]],
+  ['settings_6',['settings',['../classapp_1_1models_1_1user_1_1_user.html#ade2dc022f48378dd0705e669c7888653',1,'app.models.user.User.settings'],['../namespaceapp_1_1database.html#abd80dd90073d65c1190b4ff7c86ea06e',1,'app.database.settings'],['../namespaceapp_1_1services_1_1email__service.html#a6c02324f4fce621c3fb82b48eff5174a',1,'app.services.email_service.settings'],['../namespaceapp_1_1services_1_1llm__service.html#afa8162bdb51bcd3638da14fe6f3db6ff',1,'app.services.llm_service.settings'],['../namespaceapp_1_1utils_1_1security.html#a15953caa2d063b3781a084f79c2614b9',1,'app.utils.security.settings'],['../namespaceapp_1_1routers_1_1users.html#a783d2ad47527a56f2e36e27441ac2325',1,'app.routers.users.settings()']]],
+  ['slug_7',['slug',['../classapp_1_1models_1_1topic_1_1_topic.html#a554e9732b8eb04e08255e5abd0adba6d',1,'app::models::topic::Topic']]],
+  ['smtp_5fhost_8',['SMTP_HOST',['../classapp_1_1config_1_1_settings.html#acfe5980e573903fbe51cac0764436871',1,'app::config::Settings']]],
+  ['smtp_5fpassword_9',['SMTP_PASSWORD',['../classapp_1_1config_1_1_settings.html#a86efbc365c5af9bcac7c360c5b320397',1,'app::config::Settings']]],
+  ['smtp_5fport_10',['SMTP_PORT',['../classapp_1_1config_1_1_settings.html#a94bef07ec5af530976ca78d60664e60a',1,'app::config::Settings']]],
+  ['smtp_5fuser_11',['SMTP_USER',['../classapp_1_1config_1_1_settings.html#a88d6bdc53c27c2b27e1e03274e598d7c',1,'app::config::Settings']]],
+  ['source_5ftype_12',['source_type',['../classapp_1_1models_1_1news_1_1_news_item.html#a29773b2f247cc5e0dcf41f9d7905edc0',1,'app::models::news::NewsItem']]],
+  ['status_13',['status',['../classapp_1_1models_1_1news_1_1_news_item.html#a08f91487aabb20d93bd424c0bedd1354',1,'app.models.news.NewsItem.status'],['../classapp_1_1models_1_1news_1_1_news_submission.html#ac681025e4da8556a21623d7118c3fd53',1,'app.models.news.NewsSubmission.status']]],
+  ['submission_14',['submission',['../classapp_1_1models_1_1news_1_1_news_item.html#a5ba1fcd80df6e58c531ea86780dd5bf7',1,'app::models::news::NewsItem']]],
+  ['submission_5fid_15',['submission_id',['../classapp_1_1models_1_1news_1_1_news_item.html#ac86858b664a521a4cf9a810f5008bda2',1,'app::models::news::NewsItem']]],
+  ['submissioncreate_16',['SubmissionCreate',['../classapp_1_1schemas_1_1submissions_1_1_submission_create.html',1,'app::schemas::submissions']]],
+  ['submissionresponse_17',['SubmissionResponse',['../classapp_1_1schemas_1_1submissions_1_1_submission_response.html',1,'app::schemas::submissions']]],
+  ['submissions_18',['submissions',['../classapp_1_1models_1_1user_1_1_user.html#a672463e1ec75fad5cc132bb595004748',1,'app::models::user::User']]],
+  ['submissions_2epy_19',['submissions.py',['../routers_2submissions_8py.html',1,'(Global Namespace)'],['../schemas_2submissions_8py.html',1,'(Global Namespace)']]],
+  ['submit_5fform_20',['submit_form',['../namespaceapp_1_1routers_1_1submissions.html#a7163af9f12c3e685417270298c63d021',1,'app::routers::submissions']]],
+  ['submit_5fnews_21',['submit_news',['../namespaceapp_1_1routers_1_1submissions.html#a4c1715cb0b26911e1a758588eee11ed5',1,'app::routers::submissions']]],
+  ['summary_22',['summary',['../classapp_1_1models_1_1news_1_1_news_item.html#a477320274d650a47a604a17dfb1b3283',1,'app::models::news::NewsItem']]]
+];

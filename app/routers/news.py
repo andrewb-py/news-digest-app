@@ -16,13 +16,13 @@ templates = Jinja2Templates(directory="app/templates")
 
 @router.get("/feed", response_class=HTMLResponse)
 async def news_feed(request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    """
+    """! 
     Отображает ленту новостей с рекомендациями для пользователя.
-
-    :param request: FastAPI Request объект
-    :param db: Асинхронная сессия SQLAlchemy
-    :param user: Текущий пользователь (авторизован)
-    :return: HTML-страница с лентой новостей
+    
+    @param request FastAPI Request объект
+    @param db Асинхронная сессия SQLAlchemy
+    @param user Текущий пользователь (авторизован)
+    @return HTML-страница с лентой новостей
     """
     # Теперь лента сортируется по рекомендациям
     news = await get_recommended_news(db, user.id)
@@ -35,14 +35,14 @@ async def news_feed(request: Request, db: AsyncSession = Depends(get_db), user: 
 
 @router.get("/search", response_class=HTMLResponse)
 async def search_news(request: Request, q: str = Query(None), db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    """
+    """! 
     Выполняет поиск новостей по заголовку или саммари.
-
-    :param request: FastAPI Request объект
-    :param q: Поисковый запрос
-    :param db: Асинхронная сессия SQLAlchemy
-    :param user: Текущий пользователь (авторизован)
-    :return: HTML-страница с результатами поиска
+    
+    @param request FastAPI Request объект
+    @param q Поисковый запрос
+    @param db Асинхронная сессия SQLAlchemy
+    @param user Текущий пользователь (авторизован)
+    @return HTML-страница с результатами поиска
     """
     if not q or len(q.strip()) < 2:
         return templates.TemplateResponse("dashboard.html", {"request": request, "news": [], "user": user, "favorites": set(), "search_query": q, "error": "Введите минимум 2 символа"})
@@ -60,14 +60,14 @@ async def search_news(request: Request, q: str = Query(None), db: AsyncSession =
 
 @router.post("/{news_id}/favorite")
 async def toggle_favorite(news_id: int, request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    """
+    """! 
     Добавляет или удаляет новость из избранного пользователя.
-
-    :param news_id: ID новости
-    :param request: FastAPI Request объект
-    :param db: Асинхронная сессия SQLAlchemy
-    :param user: Текущий пользователь (авторизован)
-    :return: RedirectResponse на предыдущую страницу
+    
+    @param news_id ID новости
+    @param request FastAPI Request объект
+    @param db Асинхронная сессия SQLAlchemy
+    @param user Текущий пользователь (авторизован)
+    @return RedirectResponse на предыдущую страницу
     """
     existing = (await db.execute(select(Favorite).where(Favorite.user_id == user.id, Favorite.news_id == news_id))).scalar_one_or_none()
     if existing: await db.delete(existing)
@@ -77,13 +77,13 @@ async def toggle_favorite(news_id: int, request: Request, db: AsyncSession = Dep
 
 @router.get("/favorites", response_class=HTMLResponse)
 async def user_favorites(request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    """
+    """! 
     Отображает страницу избранных новостей пользователя.
-
-    :param request: FastAPI Request объект
-    :param db: Асинхронная сессия SQLAlchemy
-    :param user: Текущий пользователь (авторизован)
-    :return: HTML-страница со списком избранных новостей
+    
+    @param request FastAPI Request объект
+    @param db Асинхронная сессия SQLAlchemy
+    @param user Текущий пользователь (авторизован)
+    @return HTML-страница со списком избранных новостей
     """
     fav_ids = (await db.execute(
         select(Favorite.news_id).where(Favorite.user_id == user.id)
@@ -102,14 +102,14 @@ async def user_favorites(request: Request, db: AsyncSession = Depends(get_db), u
 
 @router.post("/{news_id}/delete")
 async def delete_news(news_id: int, request: Request, db: AsyncSession = Depends(get_db), admin: User = Depends(require_admin)):
-    """
+    """! 
     Удаляет новость из базы данных (только для администраторов).
-
-    :param news_id: ID новости для удаления
-    :param request: FastAPI Request объект
-    :param db: Асинхронная сессия SQLAlchemy
-    :param admin: Администратор (авторизован)
-    :return: RedirectResponse на предыдущую страницу
+    
+    @param news_id ID новости для удаления
+    @param request FastAPI Request объект
+    @param db Асинхронная сессия SQLAlchemy
+    @param admin Администратор (авторизован)
+    @return RedirectResponse на предыдущую страницу
     """
     news = (await db.execute(select(NewsItem).where(NewsItem.id == news_id))).scalar_one_or_none()
     if news:

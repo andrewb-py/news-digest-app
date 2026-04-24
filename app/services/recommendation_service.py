@@ -4,13 +4,13 @@ from app.models.news import NewsItem
 from app.models.topic import UserTopic
 
 async def get_recommended_news(db, user_id: int, limit: int = 20):
-    """
+    """! 
     Возвращает рекомендованные новости для пользователя на основе его интересов.
-
-    :param db: Асинхронная сессия SQLAlchemy
-    :param user_id: ID пользователя
-    :param limit: Максимальное количество новостей
-    :return: Список объектов NewsItem, отсортированных по релевантности
+    
+    @param db Асинхронная сессия SQLAlchemy
+    @param user_id ID пользователя
+    @param limit Максимальное количество новостей
+    @return Список объектов NewsItem, отсортированных по релевантности
     """
     user_topic_ids = set((await db.execute(
         select(UserTopic.topic_id).where(UserTopic.user_id == user_id)

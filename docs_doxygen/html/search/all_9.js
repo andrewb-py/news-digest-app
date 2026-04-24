@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['id_0',['id',['../classapp_1_1models_1_1news_1_1_news_item.html#af67b32d65001838225f2dae8702d0325',1,'app.models.news.NewsItem.id'],['../classapp_1_1models_1_1news_1_1_news_submission.html#aa9e05ca50c580b573701b323bb730fb0',1,'app.models.news.NewsSubmission.id'],['../classapp_1_1models_1_1news_1_1_favorite.html#a28f01c583a2c3da68e4340f533aa604f',1,'app.models.news.Favorite.id'],['../classapp_1_1models_1_1topic_1_1_topic.html#a45f9d3c41a1fb9a8bfc6b1dd0e89e2ed',1,'app.models.topic.Topic.id'],['../classapp_1_1models_1_1topic_1_1_user_topic.html#a43551a7f8fad60dd98d998c7cc9f82e2',1,'app.models.topic.UserTopic.id'],['../classapp_1_1models_1_1user_1_1_user.html#a8c90707df208d1d61ef657d2131a13a2',1,'app.models.user.User.id'],['../classapp_1_1models_1_1user_1_1_user_settings.html#ad423d429a132bfb69fcd01bcb173c6aa',1,'app.models.user.UserSettings.id']]],
+  ['is_5furl_5faccessible_1',['is_url_accessible',['../namespaceapp_1_1utils_1_1validators.html#a4671ea1aa146f4ca02db1a309b18b759',1,'app::utils::validators']]],
+  ['is_5fvalid_5fpdf_5furl_2',['is_valid_pdf_url',['../namespaceapp_1_1utils_1_1validators.html#ae7066598c0315022184b2cbb97f12c84',1,'app::utils::validators']]]
+];

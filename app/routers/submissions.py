@@ -17,26 +17,26 @@ templates = Jinja2Templates(directory="app/templates")
 
 @router.get("/", response_class=HTMLResponse)
 async def submit_form(request: Request, user: User = Depends(get_current_user)):
-    """
+    """! 
     Отображает форму подачи новой новости.
-
-    :param request: FastAPI Request объект
-    :param user: Текущий пользователь (авторизован)
-    :return: HTML-страница с формой
+    
+    @param request FastAPI Request объект
+    @param user Текущий пользователь (авторизован)
+    @return HTML-страница с формой
     """
     return templates.TemplateResponse("submit.html", {"request": request, "user": user, "error": None})
 
 @router.post("/", response_class=HTMLResponse)
 async def submit_news(request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    """
+    """! 
     Обрабатывает отправку новой новости на модерацию.
-
+    
     Извлекает текст из URL или комментария, генерирует метаданные через LLM.
-
-    :param request: FastAPI Request объект с формой
-    :param db: Асинхронная сессия SQLAlchemy
-    :param user: Текущий пользователь (авторизован)
-    :return: RedirectResponse на ленту с сообщением
+    
+    @param request FastAPI Request объект с формой
+    @param db Асинхронная сессия SQLAlchemy
+    @param user Текущий пользователь (авторизован)
+    @return RedirectResponse на ленту с сообщением
     """
     form = await request.form()
     url, comment = form.get("url"), form.get("comment")

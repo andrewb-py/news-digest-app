@@ -19,9 +19,9 @@ app.include_router(news.router)
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard_redirect():
-    """
+    """! 
     Перенаправляет со старого пути /dashboard на актуальный /news/feed.
-
-    :return: RedirectResponse на /news/feed
+    
+    @return RedirectResponse на /news/feed
     """
     return RedirectResponse(url="/news/feed", status_code=302)
