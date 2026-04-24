@@ -1,0 +1,28 @@
+<div class="card h-100 shadow-sm position-relative">
+  {% if user and user.role == 'admin' %}
+  <form method="POST" action="/news/{{ item.id }}/delete" class="position-absolute" style="top: 25px; left: 320px; z-index: 10;">
+    <button type="submit" class="btn btn-sm btn-danger py-0 px-2" onclick="return confirm('Удалить эту новость?')">🗑️</button>
+  </form>
+  {% endif %}
+  
+  <div class="card-body d-flex flex-column pt-4">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <span class="badge bg-secondary">{{ item.source_type|upper }}</span>
+      <form method="POST" action="/news/{{ item.id }}/favorite" style="margin:0">
+        <button class="btn btn-sm {% if item.id in favorites %}btn-warning{% else %}btn-outline-warning{% endif %}">
+          {% if item.id in favorites %}★{% else %}☆{% endif %}
+        </button>
+      </form>
+    </div>
+    <h5 class="card-title">{{ item.title }}</h5>
+    <p class="card-text flex-grow-1 text-muted small">{{ item.summary[:150] }}{% if item.summary|length > 150 %}...{% endif %}</p>
+    <div class="mt-3">
+      {% if item.topics %}
+      <div class="mb-2">
+        {% for t in item.topics %}<span class="badge bg-light text-dark me-1">#{{ t.slug }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      <a href="{{ item.original_url }}" target="_blank" class="btn btn-outline-primary btn-sm w-100">Читать оригинал</a>
+    </div>
+  </div>
+</div>

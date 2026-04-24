@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mx-auto mt-4" style="max-width:600px">
+  <div class="card-body">
+    <h4>Предложить новость</h4>
+    {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+    <form method="POST">
+      <div class="mb-3">
+        <label>URL статьи</label>
+        <input type="url" name="url" class="form-control" placeholder="https://..." required>
+      </div>
+      <div class="mb-3">
+        <label>Комментарий (необязательно)</label>
+        <textarea name="comment" class="form-control" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Отправить на модерацию</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/news/search" method="GET" class="mb-4">
+  <div class="input-group">
+    <input type="text" name="q" class="form-control" placeholder="Поиск по заголовкам и саммари..." value="{{ search_query or '' }}">
+    <button class="btn btn-primary" type="submit">Найти</button>
+  </div>
+</form>
+
+{% if msg %}<div class="alert alert-info">{{ msg }}</div>{% endif %}
+
+{% if error %}<div class="alert alert-warning">{{ error }}</div>{% endif %}
+
+<h3 class="mb-3">
+  {% if is_fav_page %}⭐ Избранное <a href="/news/feed" class="btn btn-sm btn-outline-secondary ms-2">← К ленте</a>
+  {% elif search_query %}🔍 Результаты: "{{ search_query }}" <a href="/news/feed" class="btn btn-sm btn-outline-secondary ms-2">Сбросить</a>
+  {% else %}📰 Ваша лента{% endif %}
+</h3>
+
+{% if news %}
+<div class="row">
+  {% for item in news %}
+  <div class="col-md-6 col-lg-4 mb-4">{% include "components/news_card.html" %}</div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5 bg-white rounded shadow-sm">
+  <h4 class="text-muted">{% if search_query %}Ничего не найдено{% else %}По вашим темам пока нет новостей{% endif %}</h4>
+  {% if not search_query %}<p class="text-muted">Измените настройки тем или подождите новых публикаций</p>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

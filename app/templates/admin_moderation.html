@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="mb-4">🛡️ Модерация заявок</h3>
+<a href="/admin/add" class="btn btn-success mb-3">+ Добавить новость вручную</a>
+
+{% if not submissions %}
+<div class="alert alert-info">Заявок на модерацию нет</div>
+{% endif %}
+
+{% for sub in submissions %}
+<div class="card mb-4 shadow-sm">
+  <div class="card-header bg-light d-flex justify-content-between align-items-center">
+    <small class="text-muted">ID: {{ sub.id }} | {{ sub.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+    <small class="text-muted">От: {{ sub.user.email if sub.user else 'Аноним' }}</small>
+  </div>
+  <div class="card-body">
+    <p class="mb-2"><strong>Источник:</strong> 
+      {% if sub.url %}<a href="{{ sub.url }}" target="_blank">{{ sub.url }}</a>
+      {% elif sub.pdf_path %}<span class="badge bg-secondary">{{ sub.pdf_path }}</span>
+      {% else %}Только комментарий{% endif %}
+    </p>
+    {% if sub.comment %}<p class="mb-3"><strong>Комментарий:</strong> <em>{{ sub.comment }}</em></p>{% endif %}
+
+    {% set llm = sub.llm_data or {} %}
+    
+    <form method="POST" action="/admin/moderation/{{ sub.id }}/approve" class="border rounded p-3 bg-light mb-3">
+      <div class="mb-2">
+        <label class="form-label fw-bold">Заголовок</label>
+        <input type="text" name="title" class="form-control" value="{{ llm.get('title', '') }}">
+      </div>
+      <div class="mb-2">
+        <label class="form-label fw-bold">Саммари</label>
+        <textarea name="summary" class="form-control" rows="3">{{ llm.get('summary', '') }}</textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label small">Темы (отмечены рекомендации LLM)</label>
+        <div class="d-flex flex-wrap gap-2">
+          {% set rec = llm.get('topics', []) %}
+          <label class="badge bg-light text-dark border"><input type="checkbox" name="topic_slugs" value="tech" {% if 'tech' in rec %}checked{% endif %}> Технологии</label>
+          <label class="badge bg-light text-dark border"><input type="checkbox" name="topic_slugs" value="science" {% if 'science' in rec %}checked{% endif %}> Наука</label>
+          <label class="badge bg-light text-dark border"><input type="checkbox" name="topic_slugs" value="business" {% if 'business' in rec %}checked{% endif %}> Бизнес</label>
+          <label class="badge bg-light text-dark border"><input type="checkbox" name="topic_slugs" value="sport" {% if 'sport' in rec %}checked{% endif %}> Спорт</label>
+          <label class="badge bg-light text-dark border"><input type="checkbox" name="topic_slugs" value="politics" {% if 'politics' in rec %}checked{% endif %}> Политика</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success btn-sm">✅ Опубликовать</button>
+    </form>
+
+    <form method="POST" action="/admin/moderation/{{ sub.id }}/delete" class="d-inline">
+      <button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('Удалить заявку #{{ sub.id }} безвозвратно?')">🗑️ Удалить</button>
+    </form>
+
+    <form method="POST" action="/admin/moderation/{{ sub.id }}/reject" class="d-inline ms-2">
+      <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Отклонить заявку #{{ sub.id }}?')">✖️ Отклонить</button>
+    </form>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

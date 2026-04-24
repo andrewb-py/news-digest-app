@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Добавить новость</h4>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label>URL</label>
+    <input type="url" name="url" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label>Или загрузить PDF</label>
+    <input type="file" name="file" accept=".pdf" class="form-control">
+    <div class="progress mt-2 d-none" id="uploadProgress">
+      <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+<script>
+// Простой индикатор загрузки
+document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+  if (e.target.files[0]) {
+    document.getElementById('uploadProgress').classList.remove('d-none');
+    // Здесь можно добавить реальную загрузку через fetch + XMLHttpRequest для прогресса
+  }
+});
+</script>
+{% endblock %}
